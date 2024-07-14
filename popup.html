@@ -1,38 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Math & Physics Solver</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css">
-    <style>
-        body {
-            min-height: 100vh;
-            background-color: #f0f4f8;
-        }
-        #output {
-            overflow-wrap: break-word;
-            max-height: 400px;
-            overflow-y: scroll;
-        }
-    </style>
-</head>
-<body class="bg-gray-100 flex flex-col items-center justify-center p-4" style="width: 350px; height: px;">
-    <header class="w-full text-center mb-4">
-        <h1 class="text-2xl font-bold text-blue-700">Math & Physics Solver</h1>
-    </header>
-    <div class="w-full max-w-6xl p-4 bg-white shadow-md rounded-lg">
-        <button id="screenshot-btn" class="w-full px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none">
-            Take Screenshot
-        </button>
-        <div id="output" class="mt-6 p-4 bg-gray-100 shadow-inner rounded-lg overflow-auto"></div>
-    </div>
-    <footer class="w-full text-center mt-4">
-        <p class="text-sm text-gray-500">&copy; 2024 Your Company</p>
-    </footer>
-    <script src="https://cdn.jsdelivr.net/npm/markdown-it@12.0.6/dist/markdown-it.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/markdown-it-katex@3.0.0/dist/markdown-it-katex.min.js"></script>
-    <script src="popup.js"></script>
-</body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Math & Physics Solver</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+            rel="stylesheet"
+        />
+        <style>
+            body {
+                min-height: 100vh;
+                background-color: #f0f4f8;
+            }
+            #output {
+                overflow-wrap: break-word;
+                max-height: 400px;
+                overflow-y: scroll;
+            }
+        </style>
+    </head>
+    <body
+        class="bg-gray-100 flex flex-col items-center justify-center p-4"
+        style="width: 350px; height: px"
+    >
+        <header class="w-full text-center mb-4">
+            <h1 class="text-2xl font-bold text-blue-700">
+                Math & Physics Solver
+            </h1>
+        </header>
+        <div class="w-full max-w-6xl p-4 bg-white shadow-md rounded-lg">
+            <button
+                id="screenshot-btn"
+                class="w-full px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none"
+            >
+                Take Screenshot
+            </button>
+            <div
+                id="output"
+                class="mt-6 p-4 bg-gray-100 shadow-inner rounded-lg overflow-auto"
+            ></div>
+        </div>
+        <footer class="w-full text-center mt-4">
+            <p class="text-sm text-gray-500">&copy; 2024 Your Company</p>
+        </footer>
+
+        <script src="/libs/markdown-it.min.js"></script>
+        <script src="/libs/katex.min.js"></script>
+        <script src="/libs/auto-render.min.js"></script>
+
+        <!-- <script src="/libs/index.min.js"></script> -->
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css"
+            integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+"
+            crossorigin="anonymous"
+        />
+
+        <script src="popup.js"></script>
+    </body>
 </html>
