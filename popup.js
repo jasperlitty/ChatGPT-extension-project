@@ -1,3 +1,4 @@
+
 document.addEventListener("DOMContentLoaded", () => {
     // Check if markdown-it is loaded
     if (typeof window.markdownit === "function") {
@@ -18,6 +19,32 @@ document.addEventListener("DOMContentLoaded", () => {
     //     console.error("markdown-it-katex failed to load.");
     //     return; // Stop further execution if markdown-it-katex is not loaded
     // }
+
+document.getElementById("screenshot-btn").addEventListener("click", () => {
+    handleScreenshotClick();
+    addButtonClickAnimation("screenshot-btn");
+});
+
+document.getElementById("refresh-btn").addEventListener("click", () => {
+    handleScreenshotClick();
+    addButtonClickAnimation("refresh-btn");
+    addRotationAnimation("refresh-btn");
+});
+
+function handleScreenshotClick() {
+    console.log("Button was clicked!");
+    const messageContainer = document.getElementById("message-container");
+    const message = document.createElement("p");
+    message.className = "message text-lg font-semibold";
+    message.textContent = "Button was clicked!";
+    messageContainer.appendChild(message);
+
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+        chrome.tabs.captureVisibleTab(null, {}, async function (image) {
+        console.log("Screenshot captured");
+        console.log(image);
+        });
+    });
 
     document.getElementById("screenshot-btn").addEventListener("click", () => {
         // Query the current active tab
@@ -84,3 +111,15 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
+
+function addButtonClickAnimation(buttonId) {
+    const button = document.getElementById(buttonId);
+    button.classList.add("button-clicked");
+    setTimeout(() => button.classList.remove("button-clicked"), 300);
+}
+
+function addRotationAnimation(buttonId) {
+    const button = document.getElementById(buttonId).querySelector("i");
+    button.classList.add("rotate-animation");
+    setTimeout(() => button.classList.remove("rotate-animation"), 1000);
+}
