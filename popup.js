@@ -1,10 +1,3 @@
-// Ensure marked is loaded
-if (typeof marked === "undefined") {
-  console.error("marked is not defined");
-} else {
-  console.log("marked is successfully loaded");
-}
-
 document.getElementById("screenshot-btn").addEventListener("click", () => {
   // Query the current active tab
   console.log("Button was clicked!");
@@ -22,10 +15,11 @@ document.getElementById("screenshot-btn").addEventListener("click", () => {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
-              Authorization: "Bearer sk-proj-", // Replace with your API key
+              Authorization:
+                "Bearer sk-proj-HTUcuOHxBiHmXIkSaDOfT3BlbkFJ2CsjspDYTA4ts6JwsQwp", // Replace with your API key
             },
             body: JSON.stringify({
-              model: "gpt-4o",
+              model: "gpt-4",
               messages: [
                 {
                   role: "user",
@@ -54,19 +48,10 @@ document.getElementById("screenshot-btn").addEventListener("click", () => {
         const result = await response.json();
         console.log(result);
 
-        // Use marked to parse markdown
-        const markdownContent = marked.parse(result.choices[0].message.content);
+        // Initialize markdown-it with markdown-it-katex plugin
+        const md = window.markdownit().use(window.markdownitKatex);
+        const markdownContent = md.render(result.choices[0].message.content);
         document.getElementById("output").innerHTML = markdownContent;
-
-        // Render LaTeX
-        renderMathInElement(document.getElementById("output"), {
-          delimiters: [
-            { left: "$$", right: "$$", display: true },
-            { left: "\\[", right: "\\]", display: true },
-            { left: "$", right: "$", display: false },
-            { left: "\\(", right: "\\)", display: false },
-          ],
-        });
       } catch (error) {
         console.error("Error:", error);
         document.body.innerHTML += `<p>Error: ${error.message}</p>`;
