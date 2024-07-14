@@ -1,7 +1,22 @@
 document.getElementById("screenshot-btn").addEventListener("click", () => {
-  // Query the current active tab
+  handleScreenshotClick();
+  addButtonClickAnimation("screenshot-btn");
+});
+
+document.getElementById("refresh-btn").addEventListener("click", () => {
+  handleScreenshotClick();
+  addButtonClickAnimation("refresh-btn");
+  addRotationAnimation("refresh-btn");
+});
+
+function handleScreenshotClick() {
   console.log("Button was clicked!");
-  document.body.innerHTML += "<p>Button was clicked!</p>";
+  const messageContainer = document.getElementById("message-container");
+  const message = document.createElement("p");
+  message.className = "message text-lg font-semibold";
+  message.textContent = "Button was clicked!";
+  messageContainer.appendChild(message);
+
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     chrome.tabs.captureVisibleTab(null, {}, async function (image) {
       console.log("Screenshot captured");
@@ -54,8 +69,23 @@ document.getElementById("screenshot-btn").addEventListener("click", () => {
         document.getElementById("output").innerHTML = markdownContent;
       } catch (error) {
         console.error("Error:", error);
-        document.body.innerHTML += `<p>Error: ${error.message}</p>`;
+        const errorMessage = document.createElement("p");
+        errorMessage.className = "message text-lg font-semibold text-red-600";
+        errorMessage.textContent = `Error: ${error.message}`;
+        messageContainer.appendChild(errorMessage);
       }
     });
   });
-});
+}
+
+function addButtonClickAnimation(buttonId) {
+  const button = document.getElementById(buttonId);
+  button.classList.add("button-clicked");
+  setTimeout(() => button.classList.remove("button-clicked"), 300);
+}
+
+function addRotationAnimation(buttonId) {
+  const button = document.getElementById(buttonId).querySelector("i");
+  button.classList.add("rotate-animation");
+  setTimeout(() => button.classList.remove("rotate-animation"), 1000);
+}
