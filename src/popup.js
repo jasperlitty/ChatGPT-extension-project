@@ -1,23 +1,24 @@
+import markdownit from "markdown-it";
+import katex from "katex";
+import "katex/dist/katex.min.css";
+
+// 初始化markdown-it
+const md = markdownit();
+
 document.addEventListener("DOMContentLoaded", () => {
     // Check if markdown-it is loaded
-    if (typeof window.markdownit === "function") {
+    if (md) {
         console.log("markdown-it is loaded successfully.");
     } else {
         console.error("markdown-it failed to load.");
         return; // Stop further execution if markdown-it is not loaded
     }
-    if (typeof window.katex === "object") {
+    if (katex) {
         console.log("katex is loaded successfully.");
     } else {
         console.error("katex failed to load.");
         return;
     }
-    // if (typeof window.markdownitKatex === "function") {
-    //     console.log("markdown-it-katex is loaded successfully.");
-    // } else {
-    //     console.error("markdown-it-katex failed to load.");
-    //     return; // Stop further execution if markdown-it-katex is not loaded
-    // }
 });
 
 document.getElementById("screenshot-btn").addEventListener("click", () => {
@@ -56,7 +57,7 @@ function handleScreenshotClick() {
                                 "Bearer sk-proj-HTUcuOHxBiHmXIkSaDOfT3BlbkFJ2CsjspDYTA4ts6JwsQwp", // Replace with your API key
                         },
                         body: JSON.stringify({
-                            model: "gpt-4o",
+                            model: "gpt-4o-mini",
                             messages: [
                                 {
                                     role: "user",
@@ -86,7 +87,6 @@ function handleScreenshotClick() {
                 console.log(result);
 
                 // Initialize markdown-it
-                const md = window.markdownit();
                 const markdownContent = md.render(
                     result.choices[0].message.content
                 );
