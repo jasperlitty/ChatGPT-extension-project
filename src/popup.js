@@ -1,9 +1,9 @@
 import markdownit from 'markdown-it';
 import katex from 'katex';
 import 'katex/dist/katex.min.css';
+import markdownitKatex from 'markdown-it-katex';
 
-// 初始化markdown-it
-const md = markdownit();
+const md = markdownit().use(markdownitKatex);
 
 document.addEventListener('DOMContentLoaded', () => {
 	// Check if markdown-it is loaded
@@ -32,7 +32,7 @@ document.getElementById('refresh-btn').addEventListener('click', () => {
 	addRotationAnimation('refresh-btn');
 });
 
-function handleScreenshotClick() {
+async function handleScreenshotClick() {
 	console.log('Button was clicked!');
 	const messageContainer = document.getElementById('message-container');
 	const message = document.createElement('p');
