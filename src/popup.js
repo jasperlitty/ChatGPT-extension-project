@@ -1,8 +1,8 @@
 import markdownit from 'markdown-it';
-import katex from 'katex';
-import 'katex/dist/katex.min.css';
 import markdownitKatex from 'markdown-it-katex';
+import 'katex/dist/katex.min.css';
 
+// Initialize markdown-it and extend it to support KaTeX
 const md = markdownit().use(markdownitKatex);
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -12,12 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
 	} else {
 		console.error('markdown-it failed to load.');
 		return; // Stop further execution if markdown-it is not loaded
-	}
-	if (katex) {
-		console.log('katex is loaded successfully.');
-	} else {
-		console.error('katex failed to load.');
-		return;
 	}
 });
 
@@ -82,7 +76,7 @@ async function handleScreenshotClick() {
 				const result = await response.json();
 				console.log(result);
 
-				// Initialize markdown-it
+				// Render markdown content
 				const markdownContent = md.render(result.choices[0].message.content);
 				document.getElementById('output').innerHTML = markdownContent;
 			} catch (error) {
