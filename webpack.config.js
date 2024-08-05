@@ -34,7 +34,7 @@ module.exports = (env, argv) => {
 			],
 		},
 		plugins: [
-			new CleanWebpackPlugin(),
+			new CleanWebpackPlugin(), // 每次 build 時清理 dist 目錄
 			new CopyWebpackPlugin({
 				patterns: [
 					{ from: 'src/popup.html', to: '' },
